@@ -1,5 +1,7 @@
-﻿using MyHordesWatchtower.Application;
+﻿using Microsoft.Extensions.Logging;
+using MyHordesWatchtower.Application;
 using MyHordesWatchtower.Application.Repositories;
+using MyHordesWatchtower.Domain.Models.Data;
 
 namespace MyHordesWatchtower.Host
 {
@@ -7,7 +9,7 @@ namespace MyHordesWatchtower.Host
     {
         public void Start()
         {
-            IReadOnlyList<Domain.Models.Data.CitizenEntry> entries = webClient.CollectCitizensEntries().Result;
+            IReadOnlyList<CitizenEntry> entries = webClient.CollectCitizensEntries().Result;
             _ = repository.AddCitizensEntries(entries);
             _ = Console.ReadLine();
         }

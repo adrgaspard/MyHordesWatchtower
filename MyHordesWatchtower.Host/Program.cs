@@ -27,7 +27,7 @@ IServiceCollection services = new ServiceCollection()
     .AddTransient<IWebClient, WebClient>()
     .AddLogging(options =>
     {
-        _ = options.AddConfiguration(configuration);
+        _ = options.AddConfiguration(configuration.GetRequiredSection("Logging"));
         _ = options.AddConsole();
     })
     .AddSingleton<Application>();
