@@ -8,16 +8,10 @@ namespace MyHordesWatchtower.Infrastructure.WebClient.Tools
         public static async Task AddAuthenticationCookiesAsync(this IBrowserContext context, IConfiguration configuration)
         {
             IConfigurationSection? cookiesSection = configuration.GetRequiredSection("WebClient:Authentication:Cookies");
-            if (cookiesSection is null)
+            if (cookiesSection is not null && cookiesSection.Get<Cookie[]>() is Cookie[] cookies && cookies.Length > 0)
             {
-                return;
+                await context.AddCookiesAsync(cookies);
             }
-            Cookie[] cookies = cookiesSection.Get<Cookie[]>() ?? [];
-            if (cookies.Length == 0)
-            {
-                return;
-            }
-            await context.AddCookiesAsync(cookies);
         }
 
         public static async Task WaitForRandomDuration(this IPage page, float minInMs, float maxInMs)

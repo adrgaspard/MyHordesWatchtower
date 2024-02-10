@@ -1,15 +1,31 @@
-﻿using MyHordesWatchtower.Application.Repositories;
+﻿using Microsoft.Extensions.Logging;
+using MyHordesWatchtower.Application.Repositories;
 using MyHordesWatchtower.Domain.Models.Data;
 using MyHordesWatchtower.Infrastructure.Persistance.Mappings;
+using System.Collections.Immutable;
 
 namespace MyHordesWatchtower.Infrastructure.Persistance.Repositories
 {
-    public class CitizenEntryRepository(WatchtowerDbContext dbContext) : ICitizenEntryRepository
+    public class CitizenEntryRepository(WatchtowerDbContext dbContext, ILogger<CitizenEntryRepository> logger) : ICitizenEntryRepository
     {
-        public async Task AddCitizensEntries(IEnumerable<CitizenEntry> citizensEntries)
+        public Task AddCitizensEntries(IEnumerable<CitizenEntry> citizensEntries)
         {
-            await dbContext.AddRangeAsync(citizensEntries.Select(entries => entries.ToDatabaseEntity()));
-            _ = await dbContext.SaveChangesAsync();
+            if (citizensEntries.Any())
+            {
+                var dbEntries = citizensEntries.Select(entries => entries.ToDatabaseEntity()).ToImmutableList();
+                dbContext.CitizenEntries.AddRange(dbEntries);
+                try
+                {
+                    logger.LogDebug("Saving {number} entries in database...", dbEntries.Count);
+                    dbContext.SaveChanges();
+                    logger.LogDebug("{number} entries saved!", dbEntries.Count);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "{Class}.{Method} raised an exception !", nameof(WatchtowerDbContext), nameof(WatchtowerDbContext.SaveChangesAsync));
+                }
+            }
+            return Task.CompletedTask;
         }
     }
 }

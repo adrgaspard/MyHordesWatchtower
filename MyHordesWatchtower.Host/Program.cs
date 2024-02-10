@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MyHordesWatchtower.Application;
 using MyHordesWatchtower.Application.Repositories;
 using MyHordesWatchtower.Host;
 using MyHordesWatchtower.Infrastructure.Persistance;
 using MyHordesWatchtower.Infrastructure.Persistance.Repositories;
+using MyHordesWatchtower.Infrastructure.WebClient;
 
 IConfigurationRoot configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -21,10 +24,14 @@ IServiceCollection services = new ServiceCollection()
         _ = options.UseNpgsql(configuration.GetValue<string>("Database:ConnectionString"));
     })
     .AddTransient<ICitizenEntryRepository, CitizenEntryRepository>()
-    .AddLogging()
+    .AddTransient<IWebClient, WebClient>()
+    .AddLogging(options =>
+    {
+        options.AddConfiguration(configuration);
+        options.AddConsole();
+    })
     .AddSingleton<Application>();
-
-
 ServiceProvider serviceProvider = services.BuildServiceProvider();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 serviceProvider.GetRequiredService<Application>().Start();

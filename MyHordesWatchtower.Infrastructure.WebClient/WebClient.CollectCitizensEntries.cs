@@ -13,7 +13,10 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
         private async Task<IReadOnlyList<CitizenEntry>> CollectCitizensEntries(IBrowserContext context)
         {
             await context.AddAuthenticationCookiesAsync(_configuration);
-            ImmutableList<int> skippedCitizensHordesIds = (_configuration.GetValue<int[]>("WebClient:SkippedCitizensHordesIds") ?? []).ToImmutableList();
+            IConfigurationSection? skippedCitizensSection = _configuration.GetRequiredSection("WebClient:SkippedCitizensHordesIds");
+            ImmutableList<int> skippedCitizensHordesIds = skippedCitizensSection is not null && skippedCitizensSection.Get<int[]>() is int[] skippedCitizens && skippedCitizens.Length > 0
+                ? skippedCitizens.ToImmutableList()
+                : Enumerable.Empty<int>().ToImmutableList();
             List<CitizenEntryBuilder> citizens = [];
 
             // Go to myhordes.eu
