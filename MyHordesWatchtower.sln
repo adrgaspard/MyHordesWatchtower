@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHordesWatchtower.Fetcher.Playwright", "MyHordesWatchtower.Fetcher.Playwright\MyHordesWatchtower.Fetcher.Playwright.csproj", "{9E332127-7850-4F8C-A5C2-ED6D900EC79D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHordesWatchtower.Host", "MyHordesWatchtower.Host\MyHordesWatchtower.Host.csproj", "{DA6D0E29-4477-424D-8E96-31738BB4363E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHordesWatchtower.Infrastructure.Persistance", "MyHordesWatchtower.Infrastructure.Persistance\MyHordesWatchtower.Infrastructure.Persistance.csproj", "{0975F595-AADB-43DE-A5C7-2221B3BDEDB6}"
@@ -28,14 +26,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Debug|x64.ActiveCfg = Debug|x64
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Debug|x64.Build.0 = Debug|x64
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Release|x64.ActiveCfg = Release|x64
-		{9E332127-7850-4F8C-A5C2-ED6D900EC79D}.Release|x64.Build.0 = Release|x64
 		{DA6D0E29-4477-424D-8E96-31738BB4363E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA6D0E29-4477-424D-8E96-31738BB4363E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA6D0E29-4477-424D-8E96-31738BB4363E}.Debug|x64.ActiveCfg = Debug|x64

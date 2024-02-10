@@ -2,6 +2,7 @@
 using MyHordesWatchtower.Application.Repositories;
 using MyHordesWatchtower.Domain.Models.Data;
 using MyHordesWatchtower.Infrastructure.Persistance.Mappings;
+using MyHordesWatchtower.Infrastructure.Persistance.Models;
 using System.Collections.Immutable;
 
 namespace MyHordesWatchtower.Infrastructure.Persistance.Repositories
@@ -12,12 +13,12 @@ namespace MyHordesWatchtower.Infrastructure.Persistance.Repositories
         {
             if (citizensEntries.Any())
             {
-                var dbEntries = citizensEntries.Select(entries => entries.ToDatabaseEntity()).ToImmutableList();
+                ImmutableList<DbCitizenEntry> dbEntries = citizensEntries.Select(entries => entries.ToDatabaseEntity()).ToImmutableList();
                 dbContext.CitizenEntries.AddRange(dbEntries);
                 try
                 {
                     logger.LogDebug("Saving {number} entries in database...", dbEntries.Count);
-                    dbContext.SaveChanges();
+                    _ = dbContext.SaveChanges();
                     logger.LogDebug("{number} entries saved!", dbEntries.Count);
                 }
                 catch (Exception ex)
