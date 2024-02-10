@@ -4,6 +4,18 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.41.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyHordesWatchtower.Application\MyHordesWatchtower.Application.csproj" />
+    <ProjectReference Include="..\MyHordesWatchtower.Domain\MyHordesWatchtower.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

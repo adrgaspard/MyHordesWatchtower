@@ -65,7 +65,7 @@ public class Watchtower : ScriptRunner
             string coordsStr = coordsElement is null ? "" : await coordsElement.TextContentAsync() ?? "";
             _ = builder.WithLocation(coordsStr.ConvertToLocation());
 
-            // Fetch chaman
+            // Fetch banned
             IElementHandle? bannedElement = await page.QuerySelectorAsync($".citizens-list > div:nth-child({i}) > div:nth-child(3) > div > div > div.inline > img");
             _ = builder.WithBanned(bannedElement is not null);
 

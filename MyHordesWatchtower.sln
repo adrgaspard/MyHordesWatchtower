@@ -15,6 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHordesWatchtower.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHordesWatchtower.Infrastructure.WebClient", "MyHordesWatchtower.Infrastructure.WebClient\MyHordesWatchtower.Infrastructure.WebClient.csproj", "{F421CB86-6709-4341-BF09-88EA000246D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{F0DCDBFB-6237-473C-A8B0-59B1D5737029}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,16 +62,16 @@ Global
 		{313C493F-6BA0-4ACC-8A89-EC9062BC1F38}.Release|x64.Build.0 = Release|x64
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|x64.Build.0 = Debug|Any CPU
+		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|x64.ActiveCfg = Debug|x64
+		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Debug|x64.Build.0 = Debug|x64
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Release|x64.ActiveCfg = Release|Any CPU
 		{A51EA2BA-A8A8-4530-AC5F-0303ABE25DC5}.Release|x64.Build.0 = Release|Any CPU
 		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|x64.Build.0 = Debug|Any CPU
+		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|x64.ActiveCfg = Debug|x64
+		{F421CB86-6709-4341-BF09-88EA000246D6}.Debug|x64.Build.0 = Debug|x64
 		{F421CB86-6709-4341-BF09-88EA000246D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F421CB86-6709-4341-BF09-88EA000246D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F421CB86-6709-4341-BF09-88EA000246D6}.Release|x64.ActiveCfg = Release|Any CPU

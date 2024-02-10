@@ -9,7 +9,7 @@ namespace MyHordesWatchtower.Infrastructure.Persistance.Repositories
         public async Task AddCitizensEntries(IEnumerable<CitizenEntry> citizensEntries)
         {
             await dbContext.AddRangeAsync(citizensEntries.Select(entries => entries.ToDatabaseEntity()));
-            await dbContext.SaveChangesAsync();
+            _ = await dbContext.SaveChangesAsync();
         }
     }
 }

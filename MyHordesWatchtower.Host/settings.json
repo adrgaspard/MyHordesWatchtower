@@ -1,0 +1,6 @@
+﻿{
+  "WebClient": {
+    "Headless": false,
+    "SkippedCitizensHordesIds": [ 16326 ]
+  }
+}

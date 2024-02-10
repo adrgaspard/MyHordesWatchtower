@@ -10,6 +10,7 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddCommandLine(args)
     .AddEnvironmentVariables()
+    .AddJsonFile("settings.json")
     .AddJsonFile("secrets.json")
     .Build();
 
