@@ -1,4 +1,5 @@
-﻿using MyHordesWatchtower.Application;
+﻿using Microsoft.Extensions.Configuration;
+using MyHordesWatchtower.Application;
 using MyHordesWatchtower.Application.Repositories;
 using MyHordesWatchtower.Domain.Models.Data;
 

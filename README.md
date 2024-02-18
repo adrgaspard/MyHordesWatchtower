@@ -69,4 +69,25 @@ An export to CSV file is planned in order to manipulate data on Excel.
 
 ## How to use it
 
-Coming soon.
+In order to use MyHordesWatchtower, you must have a MyHordes account:
+- Linked with [EternalTwin](https://eternaltwin.org/) login
+- With the "clairvoyance" capacity
+- Currently in town (you can go outside but you must be in town in order to automatically fetch data from other citizens)
+
+### Local installation
+
+- Install [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- Install [PostgreSQL](https://www.postgresql.org/download/)
+- Clone the repository
+- Change the `MyHordesWatchetower.Host/settings.json` and `MyHordesWatchetower.Host/secrets.json` files according to your preferences
+	- In `settings.json`:
+		- Field `WebClient:SkippedCitizensHordesIds`: put your MyHordes identifier at least in the array
+		- Field `WebClient:Headless`: set to `true` id you don't want to see the emulated browser
+	- In `secrets.json`:
+		- Use `MyHordesWatchetower.Host/secrets.example.json` for template
+		- Field `Database:ConnectionString`: set the database connection string
+		- Fields `WebClient:Authentication:EternalTwinLogin` and `WebClient:Authentication:EternalTwinPassword`: set your [EternalTwin](https://eternaltwin.org/) credentials
+- Build the solution using `dotnet build` command
+- Generate your authentication cookies (more details about that are coming soon) and paste them in the field `WebClient:Authentication:Cookies` of `MyHordesWatchetower.Host/secrets.json` file
+
+You are now ready to use MyHordesWatchtower !
