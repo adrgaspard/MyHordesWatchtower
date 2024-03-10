@@ -15,7 +15,7 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
             await context.AddAuthenticationCookiesAsync(_configuration);
             IConfigurationSection? skippedCitizensSection = _configuration.GetRequiredSection("WebClient:SkippedCitizensHordesIds");
             ImmutableList<int> skippedCitizensHordesIds = skippedCitizensSection is not null && skippedCitizensSection.Get<int[]>() is int[] skippedCitizens && skippedCitizens.Length > 0
-                ? skippedCitizens.ToImmutableList()
+                ? [.. skippedCitizens]
                 : Enumerable.Empty<int>().ToImmutableList();
             List<CitizenEntryBuilder> citizens = [];
 

@@ -7,5 +7,7 @@ namespace MyHordesWatchtower.Application
         Task<string> GenerateAuthenticationCookies();
 
         Task<IReadOnlyList<CitizenEntry>> CollectCitizensEntries();
+
+        Task FarmThiefs();
     }
 }

@@ -3,7 +3,15 @@
     "Headless": false,
     "SkippedCitizensHordesIds": [
       16326
-    ]
+    ],
+    "FarmStealSelfHordesId": 16326,
+    "FarmStealPartnerHordesId": 16686,
+    "WillStartStealing": true,
+    "ItemsPerStealProcedure": 6
+  },
+  "RedisClient": {
+    "Host": "localhost",
+    "FarmStealChannel": "test1"
   },
   "Logging": {
     "LogLevel": {

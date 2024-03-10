@@ -7,6 +7,7 @@ using MyHordesWatchtower.Application.Repositories;
 using MyHordesWatchtower.Host;
 using MyHordesWatchtower.Infrastructure.Persistance;
 using MyHordesWatchtower.Infrastructure.Persistance.Repositories;
+using MyHordesWatchtower.Infrastructure.RedisClient;
 using MyHordesWatchtower.Infrastructure.WebClient;
 
 IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -19,6 +20,7 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
 
 IServiceCollection services = new ServiceCollection()
     .AddSingleton<IConfiguration>(configuration)
+    .AddSingleton<IPubSub, RedisClient>()
     .AddDbContext<WatchtowerDbContext>(options =>
     {
         _ = options.UseNpgsql(configuration.GetValue<string>("Database:ConnectionString"));
@@ -34,4 +36,4 @@ IServiceCollection services = new ServiceCollection()
 ServiceProvider serviceProvider = services.BuildServiceProvider();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-serviceProvider.GetRequiredService<Application>().Start();
+serviceProvider.GetRequiredService<Application>().StartFarmThiefs();

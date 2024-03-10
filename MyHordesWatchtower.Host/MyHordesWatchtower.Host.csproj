@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -28,6 +28,7 @@
     <ProjectReference Include="..\MyHordesWatchtower.Application\MyHordesWatchtower.Application.csproj" />
     <ProjectReference Include="..\MyHordesWatchtower.Domain\MyHordesWatchtower.Domain.csproj" />
     <ProjectReference Include="..\MyHordesWatchtower.Infrastructure.Persistance\MyHordesWatchtower.Infrastructure.Persistance.csproj" />
+    <ProjectReference Include="..\MyHordesWatchtower.Infrastructure.RedisClient\MyHordesWatchtower.Infrastructure.RedisClient.csproj" />
     <ProjectReference Include="..\MyHordesWatchtower.Infrastructure.WebClient\MyHordesWatchtower.Infrastructure.WebClient.csproj" />
   </ItemGroup>
 
