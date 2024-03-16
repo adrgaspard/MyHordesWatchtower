@@ -40,13 +40,18 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
                 {
                     if (@event.PartnerHordesId == partnerId)
                     {
+                        bool fireEvent = !willStartStealing;
                         if (!taskSource.Task.IsCompleted)
                         {
+                            fireEvent = true;
                             _ = taskSource.TrySetResult(true);
                             if (!willStartStealing)
                             {
                                 GoOutside(page).Wait();
                             }
+                        }
+                        if (fireEvent)
+                        {
                             await _pubSub.Publish(farmStealChannel, new PartnerReadyEvent() { PartnerHordesId = selfId });
                         }
                     }
