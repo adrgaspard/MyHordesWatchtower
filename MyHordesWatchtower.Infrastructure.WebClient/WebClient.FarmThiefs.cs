@@ -40,19 +40,14 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
                 {
                     if (@event.PartnerHordesId == partnerId)
                     {
-                        bool fireEvent = !willStartStealing;
                         if (!taskSource.Task.IsCompleted)
                         {
-                            fireEvent = true;
                             _ = taskSource.TrySetResult(true);
                             if (!willStartStealing)
                             {
-                                GoOutside(page).Wait();
+                                await GoOutside(page);
+                                await _pubSub.Publish(farmStealChannel, new PartnerReadyEvent() { PartnerHordesId = selfId });
                             }
-                        }
-                        if (fireEvent)
-                        {
-                            await _pubSub.Publish(farmStealChannel, new PartnerReadyEvent() { PartnerHordesId = selfId });
                         }
                     }
                 });
@@ -70,6 +65,8 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
                 await GoOutside(page);
                 await _pubSub.Publish(farmStealChannel, new StealFinishedEvent() { ThiefHordesId = selfId });
             }
+
+            await Task.Delay(TimeSpan.FromHours(12));
         }
 
         private async Task StealProcedure(IPage page, int partnerId, int itemsPerProcedure)

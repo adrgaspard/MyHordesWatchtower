@@ -33,8 +33,12 @@ namespace MyHordesWatchtower.Infrastructure.WebClient.Tools
 
         public static async Task WaitForLoadingFinishedAsync(this IPage page)
         {
-            _ = await page.WaitForSelectorAsync("#loadzone[x-stack='1']");
-            _ = await page.WaitForSelectorAsync("#loadzone[x-stack='0']");
+            try
+            {
+                _ = await page.WaitForSelectorAsync("#loadzone[x-stack='1']");
+                _ = await page.WaitForSelectorAsync("#loadzone[x-stack='0']");
+            }
+            catch (Exception) { }
         }
     }
 }
