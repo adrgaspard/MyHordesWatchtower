@@ -86,15 +86,17 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
             {
                 try
                 {
+                    bool dialogAccepted = false;
                     string objectName = i == 0 ? "Costume de Lutin Vert" : "Planche tordue";
-                    void OnPageDialog(object? sender, IDialog dialog)
+                    async void OnPageDialog(object? sender, IDialog dialog)
                     {
-                        dialog.DismissAsync();
+                        await dialog.AcceptAsync();
                         page.Dialog -= OnPageDialog;
+                        dialogAccepted = true;
                     }
                     page.Dialog += OnPageDialog;
                     await page.GetByRole(AriaRole.Button, new() { Name = "Entrer pour voler un objet" }).ClickAsync();
-                    await page.Locator($"ul.inventory > li.item").First.ClickAsync();
+                    while (!dialogAccepted) ;
                     await page.Locator("#content").GetByRole(AriaRole.Img, new() { Name = objectName }).First.ClickAsync();
                     await page.WaitForLoadingFinishedAsync();
                 }
