@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using MyHordesWatchtower.Application;
 using MyHordesWatchtower.Infrastructure.WebClient.Events;
@@ -16,6 +17,7 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
             int selfId = _configuration.GetValue<int>("WebClient:FarmStealSelfHordesId");
             int partnerId = _configuration.GetValue<int>("WebClient:FarmStealPartnerHordesId");
             string farmStealChannel = _configuration.GetValue<string>("RedisClient:FarmStealChannel") ?? "";
+            int count = 0;
 
             // Go to myhordes.eu
             IPage page = await context.NewPageAsync();
@@ -32,6 +34,8 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
                     {
                         await GoInside(page);
                         await StealProcedure(page, partnerId, itemsPerProcedure);
+                        count += itemsPerProcedure - 1;
+                        _logger.Log(LogLevel.Information, "Thieves count: {0}", count);
                         await GoOutside(page);
                         await _pubSub.Publish(farmStealChannel, new StealFinishedEvent() { ThiefHordesId = selfId });
                     }
@@ -97,7 +101,7 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
                     page.Dialog += OnPageDialog;
                     await page.GetByRole(AriaRole.Button, new() { Name = "Entrer pour voler un objet" }).ClickAsync();
                     while (!dialogAccepted) ;
-                    await page.Locator("#content").GetByRole(AriaRole.Img, new() { Name = objectName }).First.ClickAsync();
+                    await page.Locator(".inventory").GetByRole(AriaRole.Img, new() { Name = objectName }).First.ClickAsync();
                     await page.WaitForLoadingFinishedAsync();
                 }
                 catch (Exception)
@@ -108,6 +112,7 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
 
             // Put all the stuff in the chest
             await page.Locator(".row > div[x-ajax-href='/jx/town/house/dash'] > div").First.ClickAsync();
+            await page.WaitForLoadingFinishedAsync();
             await page.GetByRole(AriaRole.Button, new() { Name = "Vider mon sac à dos dans le" }).ClickAsync();
             await page.WaitForLoadingFinishedAsync();
         }

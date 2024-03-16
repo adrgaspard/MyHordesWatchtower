@@ -1,14 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using MyHordesWatchtower.Application;
 using MyHordesWatchtower.Domain.Models.Data;
 
 namespace MyHordesWatchtower.Infrastructure.WebClient
 {
-    public sealed partial class WebClient(IConfiguration configuration, IPubSub pubSub) : IWebClient
+    public sealed partial class WebClient(IConfiguration configuration, IPubSub pubSub, ILogger<WebClient> logger) : IWebClient
     {
         private readonly IConfiguration _configuration = configuration;
         private readonly IPubSub _pubSub = pubSub;
+        private readonly ILogger<WebClient> _logger = logger;
         private readonly bool _headless = configuration.GetValue<bool>("WebClient:Headless");
 
         public async Task<IReadOnlyList<CitizenEntry>> CollectCitizensEntries()

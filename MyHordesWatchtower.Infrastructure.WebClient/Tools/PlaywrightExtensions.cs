@@ -35,7 +35,7 @@ namespace MyHordesWatchtower.Infrastructure.WebClient.Tools
         {
             try
             {
-                _ = await page.WaitForSelectorAsync("#loadzone[x-stack='1']");
+                _ = await page.WaitForSelectorAsync("#loadzone[x-stack='1']", new() { Timeout = 5000 });
                 _ = await page.WaitForSelectorAsync("#loadzone[x-stack='0']");
             }
             catch (Exception) { }
