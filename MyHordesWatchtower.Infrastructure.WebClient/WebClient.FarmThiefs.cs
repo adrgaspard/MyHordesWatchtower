@@ -84,14 +84,28 @@ namespace MyHordesWatchtower.Infrastructure.WebClient
             {
                 try
                 {
+                    string objectName = i == 0 ? "Costume de Lutin Vert" : "Planche tordue";
+                    void OnPageDialog(object? sender, IDialog dialog)
+                    {
+                        dialog.DismissAsync();
+                        page.Dialog -= OnPageDialog;
+                    }
+                    page.Dialog += OnPageDialog;
+                    await page.GetByRole(AriaRole.Button, new() { Name = "Entrer pour voler un objet" }).ClickAsync();
                     await page.Locator($"ul.inventory > li.item").First.ClickAsync();
+                    await page.Locator("#content").GetByRole(AriaRole.Img, new() { Name = objectName }).First.ClickAsync();
                     await page.WaitForLoadingFinishedAsync();
                 }
                 catch (Exception)
                 {
-                    break;
+                    continue;
                 }
             }
+
+            // Put all the stuff in the chest
+            await page.Locator(".row > div[x-ajax-href='/jx/town/house/dash'] > div").First.ClickAsync();
+            await page.GetByRole(AriaRole.Button, new() { Name = "Vider mon sac à dos dans le" }).ClickAsync();
+            await page.WaitForLoadingFinishedAsync();
         }
 
         private async Task GoOutside(IPage page)
